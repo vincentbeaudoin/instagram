@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: vincentbeaudoin
+  api_key: '841167874489113'
+  api_secret: QFJkvXZuWaPyOp4vrBx3oJhu6T0
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: vincentbeaudoin
+  api_key: '841167874489113'
+  api_secret: QFJkvXZuWaPyOp4vrBx3oJhu6T0
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: vincentbeaudoin
+  api_key: '841167874489113'
+  api_secret: QFJkvXZuWaPyOp4vrBx3oJhu6T0
+  enhance_image_tag: true
+  static_image_support: false

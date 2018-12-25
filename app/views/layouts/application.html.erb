@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instagram-esque</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to 'Instagram-esque', welcome_index_path, { :class=>"navbar-brand" } %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <% if user_signed_in? %>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <%= link_to 'My Page', user_photos_path(current_user), { :class=>"nav-link" } %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'New Photo', new_user_photo_path(current_user), { :class=>"nav-link" } %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign out', destroy_user_session_path, { :method => :delete, :class=>"nav-link" } %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </nav>
+
+      <% if user_signed_in? %>
+        <h1>Welcome <%= current_user.email %></h1>
+      <% else %>
+        <h1>Welcome</h1>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

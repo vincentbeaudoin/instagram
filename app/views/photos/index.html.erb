@@ -1,0 +1,9 @@
+<% if @user == current_user %>
+  <h2>Listing your photos</h2>
+<% else %>
+  <h2>Listing photos of <%= @user.email %></h2>
+<% end %>
+
+<% @photos.each do |photo| %>
+    <%= render photo %>
+<% end %>

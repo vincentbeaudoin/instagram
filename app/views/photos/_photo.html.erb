@@ -1,0 +1,28 @@
+<p>
+  <strong><%= photo.user.email %></strong> <%= photo.caption %>
+</p>
+
+<p>
+  <img src="<%= photo.link %>" />
+</p>
+
+<% pre_like = photo.likes.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', user_photo_like_path(photo.user, photo, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', user_photo_likes_path(photo.user, photo), method: :post %>
+<% end %>
+
+<p><%= photo.likes.count %> <%= (photo.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+<%= render photo.comments %>
+
+<%= form_with(model: [ photo.user, photo, photo.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :body %><br />
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
