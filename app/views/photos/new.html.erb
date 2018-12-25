@@ -8,10 +8,10 @@
 
   <p>
     <%= form.label :image %><br>
-    <%= form.file_field :image %>
+    <%= form.file_field :image, :class => 'form-control-file' %>
   </p>
 
   <p>
-    <%= form.submit %>
+    <%= form.submit 'Save Photo', :class => 'btn btn-primary' %>
   </p>
 <% end %>

@@ -1,16 +1,16 @@
 <p>
-  <strong><%= photo.user.email %></strong> <%= photo.caption %>
+  <strong><%= link_to photo.user.email, user_photos_path(photo.user), class: "btn-link" %></strong> <%= photo.caption %>
 </p>
 
 <p>
-  <img src="<%= photo.link %>" />
+  <img src="<%= photo.link %>" class="img-fluid" />
 </p>
 
 <% pre_like = photo.likes.find { |like| like.user_id == current_user.id} %>
 <% if pre_like %>
-  <%= button_to 'Unlike', user_photo_like_path(photo.user, photo, pre_like), method: :delete %>
+  <%= button_to 'Unlike', user_photo_like_path(photo.user, photo, pre_like), method: :delete, :class => 'btn btn-primary' %>
 <% else %>
-  <%= button_to 'Like', user_photo_likes_path(photo.user, photo), method: :post %>
+  <%= button_to 'Like', user_photo_likes_path(photo.user, photo), method: :post, :class => 'btn btn-primary' %>
 <% end %>
 
 <p><%= photo.likes.count %> <%= (photo.likes.count) == 1 ? 'Like' : 'Likes'%></p>
@@ -23,6 +23,6 @@
     <%= form.text_area :body %>
   </p>
   <p>
-    <%= form.submit %>
+    <%= form.submit 'Create Comment', :class => 'btn btn-primary' %>
   </p>
 <% end %>

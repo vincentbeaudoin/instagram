@@ -15,25 +15,19 @@ class PhotosController < ApplicationController
   end
 
   def create
-    create_photo
+    @parameters = photo_params
+    @cloudinary = Cloudinary::Uploader.upload(@parameters[:image])
+    @photo = Photo.new({:link => @cloudinary['secure_url'], :caption => @parameters[:caption]})
+    @photo.user = current_user
 
     if @photo.save
-      respond_to do |format|
-        redirect_to user_photo_path(current_user, @photo)
-      end
+      redirect_to user_photo_path(current_user, @photo)
     else
       render 'new'
     end
   end
 
   private
-    def create_photo
-      @parameters = photo_params
-      @cloudinary = Cloudinary::Uploader.upload(@parameters[:image])
-      @photo = Photo.new({:link => @cloudinary['secure_url'], :caption => @parameters[:caption]})
-      @photo.user = current_user
-    end
-
     def photo_params
       params.require(:photo).permit(:caption, :image)
     end
